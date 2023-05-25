@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 
 function PickPokemon(props) {
   const [item, setItem] = useState([]);
+  const [rope, setRope] = useState([]);
 
   function getAllPokemon() {
     fetch(
@@ -22,16 +23,41 @@ function PickPokemon(props) {
   useEffect(() => {
     getAllPokemon();
   }, []);
-  
+
+  function showPokemon(event) {
+    console.log(event);
+    console.log(event.target.value);
+    setRope(event.target.value);
+  }
+
   return (
     <div className="MyPokeDex">
-        <h1>This should help you find your pokemon!</h1>
-        {/* <form onSubmit={onSubmit}>
+      <h1>This should help you find your pokemon!</h1>
+      {/* <form onSubmit={onSubmit}>
 
         </form> */}
       <ul>
+        <li>
+          <input
+            onChange={showPokemon}
+            type="search"
+            name="Pokemon"
+            id="PokeSearch"
+            value={rope}
+          />
+        </li>
+        <li>
+
+        </li>
         {item.map((pokemon) => {
-          return <li key={pokemon.id}>{pokemon.name}</li>;
+          return (
+            <li key={pokemon.id}>
+              <p>{pokemon.name}</p>
+              <p>{pokemon.type.join(", ")}</p>
+              <p> {pokemon.weaknesses.join(", ")}</p>
+              <p>{pokemon.num}</p>
+            </li>
+          );
         })}
       </ul>
     </div>
