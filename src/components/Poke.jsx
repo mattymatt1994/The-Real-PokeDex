@@ -1,5 +1,25 @@
 import { useEffect, useState } from "react";
+import "./Poke.css";
 
+let pokeTypes = [
+  "Normal",
+  "Fire",
+  "Water",
+  "Electric",
+  "Grass",
+  "Ice",
+  "Fighting",
+  "Poison",
+  "Ground",
+  "Flying",
+  "Psychic",
+  "Bug",
+  "Rock",
+  "Ghost",
+  "Dragon",
+  "Dark",
+  "Steel",
+];
 function PickPokemon(props) {
   const [pokeItem, setPokeItem] = useState([]);
   const [rope, setRope] = useState("");
@@ -35,7 +55,7 @@ function PickPokemon(props) {
   }
 
   function pokeCheck(value, index, array) {
-    return value.name.toLowerCase() == rope.toLowerCase();
+    return value.name.toLowerCase() === rope.toLowerCase();
   }
 
   return (
@@ -54,7 +74,16 @@ function PickPokemon(props) {
             value={rope}
           />
         </li>
-        <li></li>
+        <li>
+          <label For="Types">Types of Pokemon</label>
+          <select name="Types" id="Types">
+            {pokeTypes.map((pokeGenre) => {
+              return (
+                <option value= {pokeGenre}>{pokeGenre}</option>
+              )
+            })}
+          </select>
+        </li>
         {pokeFilter.map((pokemon) => {
           return (
             <li key={pokemon.id}>
