@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 
 function PickPokemon(props) {
-  const [item, setItem] = useState([]);
-  const [rope, setRope] = useState([]);
-
+  const [pokeItem, setPokeItem] = useState([]);
+  const [rope, setRope] = useState("");
+  console.log(pokeItem);
   function getAllPokemon() {
     fetch(
       `https://raw.githubusercontent.com/Biuni/PokemonGO-Pokedex/master/pokedex.json`
@@ -13,7 +13,7 @@ function PickPokemon(props) {
       })
       .then((data) => {
         console.log(data);
-        setItem(data.pokemon);
+        setPokeItem(data.pokemon);
       })
       .catch((err) => {
         console.log("You couldn't catch that pokemon!");
@@ -28,6 +28,14 @@ function PickPokemon(props) {
     console.log(event);
     console.log(event.target.value);
     setRope(event.target.value);
+  }
+  let pokeFilter = pokeItem;
+  if (rope.length > 0) {
+    pokeFilter = pokeItem.filter(pokeCheck);
+  }
+
+  function pokeCheck(value, index, array) {
+    return value.name.toLowerCase() == rope.toLowerCase();
   }
 
   return (
@@ -46,10 +54,8 @@ function PickPokemon(props) {
             value={rope}
           />
         </li>
-        <li>
-
-        </li>
-        {item.map((pokemon) => {
+        <li></li>
+        {pokeFilter.map((pokemon) => {
           return (
             <li key={pokemon.id}>
               <p>{pokemon.name}</p>
