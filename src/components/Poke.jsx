@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./Poke.css";
 
-let pokeTypes = [
+const pokeTypes = [
   "Normal",
   "Fire",
   "Water",
@@ -20,10 +20,12 @@ let pokeTypes = [
   "Dark",
   "Steel",
 ];
+console.log(pokeTypes);
 function PickPokemon(props) {
   const [pokeItem, setPokeItem] = useState([]);
   const [rope, setRope] = useState("");
-  console.log(pokeItem);
+  const [lasso, setLasso] = useState("");
+
   function getAllPokemon() {
     fetch(
       `https://raw.githubusercontent.com/Biuni/PokemonGO-Pokedex/master/pokedex.json`
@@ -44,20 +46,37 @@ function PickPokemon(props) {
     getAllPokemon();
   }, []);
 
+  const getTypes = pokeItem.concat(pokeTypes);
+
   function showPokemon(event) {
-    console.log(event);
-    console.log(event.target.value);
     setRope(event.target.value);
   }
+
+  function pokeSelect(bananna) {
+    return setLasso(bananna.target.value);
+  }
+
   let pokeFilter = pokeItem;
   if (rope.length > 0) {
-    pokeFilter = pokeItem.filter(pokeCheck);
+    pokeFilter = pokeFilter.filter(pokeCheck);
   }
 
   function pokeCheck(value, index, array) {
     return value.name.toLowerCase() === rope.toLowerCase();
   }
 
+  let bannanaFilter = pokeItem;
+  if (lasso.length > 0) {
+    bannanaFilter = bannanaFilter.filter(banannaSelect);
+    console.log(bannanaFilter);
+  }
+
+  function banannaSelect(value, index, array) {
+    console.log(value.type.indexOf(lasso));
+    return value.type.indexOf(lasso) + 1;
+    
+  }
+ 
   return (
     <div className="MyPokeDex">
       <h1>This should help you find your pokemon!</h1>
@@ -75,16 +94,18 @@ function PickPokemon(props) {
           />
         </li>
         <li>
-          <label For="Types">Types of Pokemon</label>
-          <select name="Types" id="Types">
-            {pokeTypes.map((pokeGenre) => {
+          <label htmlFor="Types">Types of Pokemon</label>
+          <select name="Types" id="Types" onChange={pokeSelect} value={lasso}>
+            {pokeTypes.map((pokeGenre, index) => {
               return (
-                <option value= {pokeGenre}>{pokeGenre}</option>
-              )
+                <option value={pokeGenre} key={pokeGenre + index}>
+                  {pokeGenre}
+                </option>
+              );
             })}
           </select>
         </li>
-        {pokeFilter.map((pokemon) => {
+        {bannanaFilter.map((pokemon) => {
           return (
             <li key={pokemon.id}>
               <p>{pokemon.name}</p>
