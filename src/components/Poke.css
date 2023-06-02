@@ -1,14 +1,53 @@
 h1 {
-    color: sandybrown;
-    text-align: center;
-    background-color: rgb(11, 56, 141);
+  color: sandybrown;
+  text-align: center;
+  background-color: rgb(11, 56, 141);
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-style: italic;
+  font-display:initial;
+  font-weight: 575;
 }
 
-ul li p{
-  list-style-type:armenian;
-  color: rgb(92, 3, 3);
+ul li p {
+  list-style-type: armenian;
+  color: rgb(180, 5, 5);
   background-color: antiquewhite;
   background-blend-mode: color;
-  
+  font-style: italic;
+  font-size: large;
+  font-weight: 400;
 }
 
+h2 {
+  text-align: center;
+  color: peru;
+  background-color: rgb(56, 12, 12);
+  font-style: italic;
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  font-size: xx-large;
+  font-weight: 500;
+  cursor: none;
+}
+
+h3 {
+  text-align: center;
+  font-stretch: ultra-expanded;
+  font-size: x-large;
+  flex-direction: column-reverse;
+  font-weight: 600;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-style: oblique;
+  color: rgb(37, 211, 211);
+  background-color: rgb(175, 146, 108);
+  cursor: none;
+}
+
+h4 {
+    text-align: center;
+    font-size: 75px;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-style: unset;
+    color: black;
+    background-color: rgb(92, 3, 3);
+    cursor: none;
+}

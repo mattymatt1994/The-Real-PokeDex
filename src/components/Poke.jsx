@@ -142,6 +142,9 @@ function PickPokemon(props) {
           );
         })}
       </ul>
+      <h2>Looks like you've been on here for awhile bud...</h2>
+      <h3>maybe get a hobby?</h3>
+      <h4>BESIDES POKEMON</h4>
     </div>
   );
 }
