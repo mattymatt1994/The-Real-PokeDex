@@ -92,10 +92,7 @@ function PickPokemon(props) {
   return (
     <div className="MyPokeDex">
       <h1>This should help you find your pokemon!</h1>
-      {/* <form onSubmit={onSubmit}>
-
-        </form> */}
-      <ul>
+        <ul>
         <li>
           <input
             onChange={showPokemon}

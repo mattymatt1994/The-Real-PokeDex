@@ -1,0 +1,14 @@
+h1 {
+    color: sandybrown;
+    text-align: center;
+    background-color: rgb(11, 56, 141);
+}
+
+ul li p{
+  list-style-type:armenian;
+  color: rgb(92, 3, 3);
+  background-color: antiquewhite;
+  background-blend-mode: color;
+  
+}
+
