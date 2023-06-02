@@ -25,7 +25,7 @@ function PickPokemon(props) {
   const [pokeItem, setPokeItem] = useState([]);
   const [rope, setRope] = useState("");
   const [lasso, setLasso] = useState("");
-
+  const [bad, setBad] = useState("");
   function getAllPokemon() {
     fetch(
       `https://raw.githubusercontent.com/Biuni/PokemonGO-Pokedex/master/pokedex.json`
@@ -49,23 +49,27 @@ function PickPokemon(props) {
   const getTypes = pokeItem.concat(pokeTypes);
 
   function showPokemon(event) {
-    setRope(event.target.value);
+    return setRope(event.target.value);
   }
 
   function pokeSelect(bananna) {
     return setLasso(bananna.target.value);
   }
 
-  let pokeFilter = pokeItem;
-  if (rope.length > 0) {
-    pokeFilter = pokeFilter.filter(pokeCheck);
+  function weakList(event) {
+    return setBad(event.target.value);
+  }
+
+  let weakFilter = pokeItem;
+  if (bad.length > 0) {
+    weakFilter = weakFilter.filter(filterWeakness);
   }
 
   function pokeCheck(value, index, array) {
     return value.name.toLowerCase() === rope.toLowerCase();
   }
 
-  let bannanaFilter = pokeItem;
+  let bannanaFilter = weakFilter;
   if (lasso.length > 0) {
     bannanaFilter = bannanaFilter.filter(banannaSelect);
     console.log(bannanaFilter);
@@ -74,9 +78,17 @@ function PickPokemon(props) {
   function banannaSelect(value, index, array) {
     console.log(value.type.indexOf(lasso));
     return value.type.indexOf(lasso) + 1;
-    
   }
- 
+
+  let pokeFilter = bannanaFilter;
+  if (rope.length > 0) {
+    pokeFilter = pokeFilter.filter(pokeCheck);
+  }
+
+  function filterWeakness(value) {
+    return value.weaknesses.indexOf(bad) + 1;
+  }
+  console.log(weakFilter);
   return (
     <div className="MyPokeDex">
       <h1>This should help you find your pokemon!</h1>
@@ -105,7 +117,24 @@ function PickPokemon(props) {
             })}
           </select>
         </li>
-        {bannanaFilter.map((pokemon) => {
+        <li>
+          <label htmlFor="Weaknesses">Pokemon Weaknesses</label>
+          <select
+            name="Weaknesses"
+            id="Weaknesses"
+            onChange={weakList}
+            value={bad}
+          >
+            {pokeTypes.map((pokePain, index) => {
+              return (
+                <option value={pokePain} key={pokePain + index}>
+                  {pokePain}
+                </option>
+              );
+            })}
+          </select>
+        </li>
+        {pokeFilter.map((pokemon) => {
           return (
             <li key={pokemon.id}>
               <p>{pokemon.name}</p>
